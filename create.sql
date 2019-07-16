@@ -20,17 +20,19 @@ CREATE TABLE ITEMS (
   First_Bid REAL,
   Number_of_Bids INT,
   Started DATETIME,
-  Ends DATETIME,
+  Ends DATETIME CHECK(Ends > Started),
   SellerID VARCHAR,
   Description VARCHAR,
-  PRIMARY KEY (itemID)
+  PRIMARY KEY (ItemID),
+  FOREIGN KEY (SellerId) REFERENCES USERS(UserID)
 );
 
 
 CREATE TABLE CATEGORIES (
   ItemID INTEGER,
   Category VARCHAR,
-  PRIMARY KEY (itemID, category)
+  PRIMARY KEY (ItemID, category),
+  FOREIGN KEY (ItemID) REFERENCES ITEMS(ItemID)
 );
 
 CREATE TABLE BIDS (
@@ -38,8 +40,11 @@ CREATE TABLE BIDS (
   BidderID VARCHAR,
   Amount REAL,
   Time DATETIME,
+  UNIQUE(TIME),
+  UNIQUE(ItemID,BidderID,Amount),
   PRIMARY KEY (BidderID, ItemID, Amount),
-  FOREIGN KEY (BidderID) REFERENCES Users(UserID)
+  FOREIGN KEY (BidderID) REFERENCES USERS(UserID),
+  FOREIGN KEY (ItemID) REFERENCES ITEMS(ItemID)
 );
 
 CREATE TABLE CurrentTime (
@@ -47,6 +52,6 @@ CREATE TABLE CurrentTime (
 );
 
 INSERT INTO CurrentTime
-VALUES('2001-12- 20 00:00:01');
+VALUES('2001-12-20 00:00:01');
 
 SELECT * FROM CurrentTime;

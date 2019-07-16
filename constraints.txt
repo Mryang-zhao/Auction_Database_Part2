@@ -11,47 +11,72 @@ CONSTRAINTS FOR USERS
 ***************************************************************************************************************************]
 
 1. No two users can share the same User ID.
-  A) I used a KEY CONSTRAINT by making the userID 
 
-  B)
+  A) I used a KEY CONSTRAINT by making the UserID a primary Key in my USERS table. If an insertion occurs where
+      the insertion includes a UserID that already exists within the database it will be denied and it will not 
+      get inserted into the table. I could of also chose to use an UNIQUE constraint but using a primary key seemed
+      more appropriate in this occasion. 
+
+  B) This is located within the file create.sql inside of the create USERS table statement.
 
 2. All sellers and bidders must already exist as users.
-  A)
+  A) I created a Referential Integrity constraint (Foreign Key) inside of the BIDS table and ITEMS table. 
 
-  b)
+      - For each Bid it checks that the BidderID exists within the the USERS table under the UserID column. If it exists 
+        then then it will allow the insertion of the tuple into the Bids table, if it does not exist then it will deny the insertion.
+      
+      - For each instertion into the ITEMS table the SellerID is verified by checking the USERS table to see if the SellerID matches
+        an UserID. If there is a match then the insertion will be allowed, otherwise it will not be inserted.
+
+  b) This is located within the file create.sql inside of the CREATE BIDS and CREATE ITEMS table statement.
 
 ***************************************************************************************************************************
 CONSTRAINTS FOR ITEMS
 ***************************************************************************************************************************
 
 1. No two items can share the same Item ID.
-  A)
 
-  B)
+  A) For this I  made ItemID the primary key of the table ITEMS. I could of chose to use an Unique constraint but using a primary key
+      for this occasion seemed more appropriate.
+
+  B) This is located within the file create.sql inside of the create ITEMS table statement.
 
 2. Every bid must correspond to an actual item. 
-  A)
 
-  B)
+  A) Inside of the BIDS table I made a Referential Constraint (Foreign Key) that references the ITEMS table. This Referential Constraint
+      is incharge of checking the ITEMS table evrytime an insertion is being made into the BIDS table and verifying that the items being
+      bid on actually exits before the tuple is inserted into the BIDS table.
+
+  B) This is located within the file create.sql inside of the create BIDS table statement.
 
 3. The items for a given category must all exist.
-  A)
 
-  B)
+  A) Inside of the CATEGORIES table I made Referential Constraint that during every insertion into the CATEGORIES table it checks
+      the ItemID being inserted with the ItemsIDs within the ITEMS table. IF it exists then the insertion into the
+      CATEGORIES table will be allowed otherwise it will not be insterted.
+
+  B) This is located within the file create.sql inside of the create CATEGORIES table statement.
 
 4. An item cannot belong to a particular category more than once.
-  A)
 
-  B)
+  A) For this I used a Key Constraint. I specifically used a primary key constraint. I made the combination of an 
+      ItemID and category (ItemID, category) into a primary  key in order to only allow one specific combination of an ItemID and a Category
+      exists per tuple.
+
+  B) This is located within the file create.sql inside of the create CATEGORIES table statement.
 
 5. The end time for an auction must always be after its start time.
-  A)
+  
+  A) In this problem I used a CHECK constraint that during every insertion into the ITEMS table it verifies that the value for 
+      Ends is at a later time (or is greater) than the time given for the starting time of the auction; IF it is not at a leter time
+      then the insertion will not occur.
 
-  B)
+  B) This is located within the file create.sql inside of the create ITEMS table statement.
 
 6. The Current Price of an item must always match the Amount of the most recent bid for that item.
+  
   A)
-
+      COME BACK AND FINISH THIS: THIS NEEDS TO BE A TRIGGER!!
   B)
 
 ***************************************************************************************************************************
@@ -59,45 +84,67 @@ CONSTRAINTS FOR BIDDING
 ***************************************************************************************************************************
 
 1. A user may not bid on an item he or she is also selling.
+  
   A)
-
+      COME BACK AND FINISH THIS: THIS NEEDS TO BE A TRIGGER!!
   B)
 
 2. No auction may have two bids at the exact same time.
-  A)
+ 
+  A) I took care of this situation by using a Key constraint of UNIQUE on the Time attribute.
+      This will force every Time attribute inputed into the BIDS table to be unique or the tuple
+      will not be inserted;
 
-  B)
+  B) This is located within the file create.sql inside of the create BIDS table statement.
 
 3. No auction may have a bid before its start time or after its end time.
+  
   A)
-
+    COME BACK AND FINISH THIS: THIS NEEDS TO BE A TRIGGER!!
   B)
 
 4. No user can make a bid of the same amount to the same item more than once.
-  A)
+  
+  A) To solve this situation I created the group of attributes (BidderID,ItemID,Amount) to be a Key Constraint of UNIQUE.
+      This will cause the system to deny insertion to  the  Bid table when the same user makes a bid on the same item for the same
+      amount more than once. 
 
-  B)
+  B) This is located within the file create.sql inside of the create BIDS table statement.
 
 5. In every auction, the Number of Bids attribute corresponds to the actual number of bids for that particular item.
+  
   A)
-
+      COME BACK AND FINISH THIS: THIS NEEDS TO BE A TRIGGER!!
   B)
 
 6. Any new bid for a particular item must have a higher amount than any of the previous bids for that particular item.
+  
   A)
-
+      COME BACK AND FINISH THIS: THIS NEEDS TO BE A TRIGGER!!
+      - Should I use the ITEMS table CURRENTLY attribute to verify what the current price of the item is?
+      - also, should I make a trigger that also updates the ITEMS table CURRENTLY attribute whenever a new bid is made?
   B)
 
 ***************************************************************************************************************************
 CONSTRAINTS FOR TIME
 ***************************************************************************************************************************
+For the purposes of this Task, you can assume that only two types of modifications will be made to your database:
+  1. The user may attempt to insert new bids.
+  2. The user may attempt to change the current time.
+You do not need to worry about any another types of modifications (e.g. insertion of new items, changing existing users, etc.) to the database.
 
 1. All new bids must be placed at the time which matches the current time of your AuctionBase system.
   A)
-
+      COME BACK AND FINISH THIS: THIS NEEDS TO BE A TRIGGER!!
   B)
 
 2. The current time of your AuctionBase system can only advance forward in time, not backward in time.
   A)
+      COME BACK AND FINISH THIS: THIS NEEDS TO BE A TRIGGER!!
+      - Maybe create a trigger that updates the time by some amount everytime any type of query is done to the database?
+  B)
 
+3. The user should not be able to change the current time of the database.
+  A)
+      COME BACK AND FINISH THIS: THIS NEEDS TO BE A TRIGGER!!
   B)
