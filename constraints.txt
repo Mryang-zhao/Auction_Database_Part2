@@ -1,0 +1,103 @@
+For each constraint, you need to state: 
+A) How the constraint was implemented did you choose to use a Key constraint (using PRIMARY KEY or UNIQUE), 
+a Referential Integrity constraint, a CHECK constraint, or a Trigger? (Note that in SQLite, Referential 
+Integrity constraints are often referred to as Foreign Key constraints.) 
+
+2) Which file(s) contain the constraint implementation this will be useful for us when we grade your Trigger 
+constraints, if you have any.
+
+***************************************************************************************************************************
+CONSTRAINTS FOR USERS
+***************************************************************************************************************************]
+
+1. No two users can share the same User ID.
+  A) I used a KEY CONSTRAINT by making the userID 
+
+  B)
+
+2. All sellers and bidders must already exist as users.
+  A)
+
+  b)
+
+***************************************************************************************************************************
+CONSTRAINTS FOR ITEMS
+***************************************************************************************************************************
+
+1. No two items can share the same Item ID.
+  A)
+
+  B)
+
+2. Every bid must correspond to an actual item. 
+  A)
+
+  B)
+
+3. The items for a given category must all exist.
+  A)
+
+  B)
+
+4. An item cannot belong to a particular category more than once.
+  A)
+
+  B)
+
+5. The end time for an auction must always be after its start time.
+  A)
+
+  B)
+
+6. The Current Price of an item must always match the Amount of the most recent bid for that item.
+  A)
+
+  B)
+
+***************************************************************************************************************************
+CONSTRAINTS FOR BIDDING
+***************************************************************************************************************************
+
+1. A user may not bid on an item he or she is also selling.
+  A)
+
+  B)
+
+2. No auction may have two bids at the exact same time.
+  A)
+
+  B)
+
+3. No auction may have a bid before its start time or after its end time.
+  A)
+
+  B)
+
+4. No user can make a bid of the same amount to the same item more than once.
+  A)
+
+  B)
+
+5. In every auction, the Number of Bids attribute corresponds to the actual number of bids for that particular item.
+  A)
+
+  B)
+
+6. Any new bid for a particular item must have a higher amount than any of the previous bids for that particular item.
+  A)
+
+  B)
+
+***************************************************************************************************************************
+CONSTRAINTS FOR TIME
+***************************************************************************************************************************
+
+1. All new bids must be placed at the time which matches the current time of your AuctionBase system.
+  A)
+
+  B)
+
+2. The current time of your AuctionBase system can only advance forward in time, not backward in time.
+  A)
+
+  B)

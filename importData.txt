@@ -1,0 +1,5 @@
+.mode csv
+.import AuctionBaseUsersData.csv Users
+.import AuctionBaseBidsData.csv Bids
+.import AuctionBaseCategoryData.csv Categories
+.import AuctionBaseItemData.csv Items
