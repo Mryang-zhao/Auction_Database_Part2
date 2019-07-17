@@ -91,7 +91,7 @@ CONSTRAINTS FOR BIDDING
 
 2. No auction may have two bids at the exact same time.
  
-  A) I took care of this situation by using a Key constraint of UNIQUE on the Time attribute.
+  A) I took care of this situation by using a Key constraint of UNIQUE on the Time and ItemID attribute.
       This will force every Time attribute inputed into the BIDS table to be unique or the tuple
       will not be inserted;
 
@@ -113,17 +113,25 @@ CONSTRAINTS FOR BIDDING
 
 5. In every auction, the Number of Bids attribute corresponds to the actual number of bids for that particular item.
   
-  A)
-      COME BACK AND FINISH THIS: THIS NEEDS TO BE A TRIGGER!!
-  B)
+  A) I took care of this scenerio by creating a trigger that gets executed after an insert into the BIDS table.
+      After the insert the trigger executes and updates a row inside of the ITEMS that has the same ItemID as the item that is getting bid on.
+      The specific attributes that get updated is the Amount and Number_of_Bids attributes.
+
+  B) This trigger is part of trigger1_add.sql, and trigger1_drop.sql
 
 6. Any new bid for a particular item must have a higher amount than any of the previous bids for that particular item.
   
-  A)
-      COME BACK AND FINISH THIS: THIS NEEDS TO BE A TRIGGER!!
-      - Should I use the ITEMS table CURRENTLY attribute to verify what the current price of the item is?
+  A) I implemented a solution to this scenerio by creating a trigger that executes before the insertion of a tuple into the BIDS table.
+      Before the inerstion, the trigger will execute and will query the Items table for the an item with the same ID as the one that was bid on and will
+      only return something back if the bid amount is less than or equal to the current amount of the Item. If it is less than or equal, then the trigger will
+      rollback the insertion and do an alert saying the following: "You must bid higher than the current highest bid!"
+
+      ASK KHALEFA THESE QUESTIONS !
+      - Should I use the ITEMS table CURRENTLY attribute to verify what the current price of the item is
+        or should i make a query that finds the max bid value?
       - also, should I make a trigger that also updates the ITEMS table CURRENTLY attribute whenever a new bid is made?
-  B)
+  
+  B) This trigger is part of trigger2_add.sql, and trigger2_drop.sql
 
 ***************************************************************************************************************************
 CONSTRAINTS FOR TIME

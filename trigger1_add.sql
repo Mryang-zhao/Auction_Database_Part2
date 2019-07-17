@@ -1,15 +1,11 @@
--- description: <constraint_description>
+DROP TRIGGER IF EXISTS Item_Price_Updated;
+
 PRAGMA foreign_keys = ON;
-drop trigger if exists <trigger_name>;
-create trigger <trigger_name>
-{before|after} {insert|update|delete} ON <table_name>
-for each row
-when <expression>
-begin
-...
-end;
-... /* add more triggers as needed */
-And your triggerN drop.sql files should have the following format:
-PRAGMA foreign_keys = ON;
-drop trigger <trigger_name>;
-... /* drop additional triggers */
+
+CREATE TRIGGER Item_Price_Updated 
+AFTER INSERT ON BIDS
+BEGIN
+  UPDATE ITEMS
+  SET  Currently = NEW.Amount, Number_of_bids = Number_of_bids + 1
+  WHERE ItemID = NEW.ItemID;
+END;

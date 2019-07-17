@@ -40,7 +40,7 @@ CREATE TABLE BIDS (
   BidderID VARCHAR,
   Amount REAL,
   Time DATETIME,
-  UNIQUE(TIME),
+  UNIQUE(ItemID, Time),
   UNIQUE(ItemID,BidderID,Amount),
   PRIMARY KEY (BidderID, ItemID, Amount),
   FOREIGN KEY (BidderID) REFERENCES USERS(UserID),
