@@ -75,9 +75,11 @@ CONSTRAINTS FOR ITEMS
 
 6. The Current Price of an item must always match the Amount of the most recent bid for that item.
   
-  A)
-      COME BACK AND FINISH THIS: THIS NEEDS TO BE A TRIGGER!!
-  B)
+  A) I took care of this scenerio by creating a trigger that gets executed after an insert into the BIDS table.
+      After the insert, the trigger executes and updates a row inside of the ITEMS that has the same ItemID as the item that is getting bid on.
+      The specific attribute that gets updated is the Amount attribute.
+
+  B) The trigger is part of trigger5_add.sql and trigger5_drop.sql
 
 ***************************************************************************************************************************
 CONSTRAINTS FOR BIDDING
@@ -85,9 +87,12 @@ CONSTRAINTS FOR BIDDING
 
 1. A user may not bid on an item he or she is also selling.
   
-  A)
-      COME BACK AND FINISH THIS: THIS NEEDS TO BE A TRIGGER!!
-  B)
+  A) For this case I created a trigger that executes before inserting a tuple into the BIDS table. This trigger
+      compares the ItemID and BidderID from the bid to a SellerID and ItemID withing the ITEMS table. If such case is 
+      found within the Items table then the trigger will ABORT the insertion into the BIDS table and show an alert
+      that says the following: 'You cant bid on items that you are selling!'
+
+  B) The trigger is part of trigger4_add.sql and trigger_drop.sql
 
 2. No auction may have two bids at the exact same time.
  
@@ -117,8 +122,8 @@ CONSTRAINTS FOR BIDDING
 5. In every auction, the Number of Bids attribute corresponds to the actual number of bids for that particular item.
   
   A) I took care of this scenerio by creating a trigger that gets executed after an insert into the BIDS table.
-      After the insert the trigger executes and updates a row inside of the ITEMS that has the same ItemID as the item that is getting bid on.
-      The specific attributes that get updated is the Amount and Number_of_Bids attributes.
+      After the insert, the trigger executes and updates a row inside of the ITEMS that has the same ItemID as the item that is getting bid on.
+      The specific attribute that gets updated is Number_of_Bids attributes.
 
   B) This trigger is part of trigger1_add.sql, and trigger1_drop.sql
 
