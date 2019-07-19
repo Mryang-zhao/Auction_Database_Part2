@@ -1,3 +1,6 @@
+-- FUNCTIONALITY: Any new bid for a particular item must have a higher 
+-- amount than any of the previous bids for that particular item.
+
 DROP TRIGGER IF EXISTS bid_higher;
 
 PRAGMA foreign_keys = ON;
@@ -10,5 +13,5 @@ WHEN EXISTS (
   WHERE Currently >= NEW.Amount AND ItemID = NEW.ItemID
 )
 BEGIN
-  SELECT RAISE(rollback, 'You must bid higher than the current highest bid!');
+  SELECT RAISE(ABORT, 'You must bid higher than the current highest bid!');
 END;

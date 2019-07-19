@@ -1,3 +1,6 @@
+-- FUNCTIONALITY: In every auction, the Number of Bids attribute corresponds 
+-- to the actual number of bids for that particular item.
+
 -- Inserts a row into the bids table and this should cause the trigger to
 -- execute and update the items table for the item with this ID.
 

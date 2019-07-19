@@ -1,0 +1,2 @@
+-- FUNCTIONALITY: No auction may have a bid before its start 
+-- time or after its end time.

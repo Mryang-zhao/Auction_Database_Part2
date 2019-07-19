@@ -1,0 +1,2 @@
+-- FUNCTIONALITY: Any new bid for a particular item must have a higher 
+-- amount than any of the previous bids for that particular item.

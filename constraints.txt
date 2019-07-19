@@ -99,9 +99,12 @@ CONSTRAINTS FOR BIDDING
 
 3. No auction may have a bid before its start time or after its end time.
   
-  A)
-    COME BACK AND FINISH THIS: THIS NEEDS TO BE A TRIGGER!!
-  B)
+  A) I took care of this scenerio by implementing a trigger that will check before any insert into the 
+      bids table if the Time of the Bid is within the start or end of time of the items auction. If it is 
+      outside of the time range then it will ABORT the insert and return an alert saying that
+      'The Auction is not taking bids at this time!'.
+
+  B) This trigger is part of trigger3_add.sql and trigger3_drop.sql
 
 4. No user can make a bid of the same amount to the same item more than once.
   
