@@ -3,4 +3,3 @@
 
 PRAGMA foreign_keys = ON;
 DROP TRIGGER IF EXISTS Item_Price_Updated;
-DROP TRIGGER IF EXISTS Item_Price_Update;
