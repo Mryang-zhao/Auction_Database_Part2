@@ -150,17 +150,25 @@ For the purposes of this Task, you can assume that only two types of modificatio
 You do not need to worry about any another types of modifications (e.g. insertion of new items, changing existing users, etc.) to the database.
 
 1. All new bids must be placed at the time which matches the current time of your AuctionBase system.
-  A)
-      COME BACK AND FINISH THIS: THIS NEEDS TO BE A TRIGGER!!
-  B)
+  
+  A) The way that I implemented this was by using a trigger called current_time_bids. My trigger gets executed after
+      every insert into the BIDS table and checks to see if the inserted tuple has a time stamp that matches the systems
+      current time. If it does not match the systems current time then it will go ahead an update the tuple time to the systems time.
+
+  B) This trigger is located in trigger6_add.sql and trigger6_drop.sql
 
 2. The current time of your AuctionBase system can only advance forward in time, not backward in time.
-  A)
-      COME BACK AND FINISH THIS: THIS NEEDS TO BE A TRIGGER!!
-      - Maybe create a trigger that updates the time by some amount everytime any type of query is done to the database?
-  B)
+  
+  A) This functionality was implemented by creating a trigger named Time_Forward. This trigger gets executed before an update
+      is made on the CurrentTime table. It will check to see whether the value of the new time update is less than the current value
+      inside of the table. If it is less than, then it will abort the update and give a message saying: 'The system time can only move forward in time'
+    
+  B) This trigger is located in trigger7_add.sql and trigger7_drop.sql
 
-3. The user should not be able to change the current time of the database.
-  A)
-      COME BACK AND FINISH THIS: THIS NEEDS TO BE A TRIGGER!!
-  B)
+3. The user should not be able to delete or insert a tuple inside of the CurrentTime table.
+
+  A) For this scenario I decided to create two triggers within the same file. Each trigger executes depending on the type of action
+      that the user might be taking towards the CurrentTime table. Whenever a DELETE or INSERT is attempted on the CurrentTime table the
+      system puts out a message specifically stating that such action cannot be taken. 
+
+  B) This trigger is located in trigger8_add.sql and trigger8_drop.sql
